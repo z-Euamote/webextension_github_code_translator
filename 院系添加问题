@@ -1,0 +1,10 @@
+	@ApiOperation(value = "添加院系")
+	@RequestMapping(value = "/addDepartment", method = RequestMethod.POST)
+	public @ResponseBody ResultEntity<Object> addDepartment(
+			@ApiParam(value = "院系名称", required = true) @RequestParam(value = "departmentName", required = true) String departmentName,
+			HttpServletRequest request) {
+		DepartmentModel entity = new DepartmentModel();
+		entity.setDepartmentName(departmentName);
+		return departmentService.insert(entity) ? new ResultEntity<>(ResponseEntity.SUCCESS, "添加成功！")
+				: new ResultEntity<>(ResponseEntity.FAILURE, "操作失败！");
+	}
